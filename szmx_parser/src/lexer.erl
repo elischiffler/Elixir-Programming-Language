@@ -45,7 +45,7 @@
 -export([format_error/1]).
 
 %% User code. This is placed here to allow extra attributes.
--file("src/lexer.xrl", 39).
+-file("src/lexer.xrl", 45).
 
 -file("c:/Program Files/Erlang OTP/lib/parsetools-2.7.1/include/leexinc.hrl", 47).
 
@@ -999,52 +999,55 @@ yyaction_1(TokenChars, TokenLine) ->
      end .
 
 -compile({inline,yyaction_2/2}).
--file("src/lexer.xrl", 23).
+-file("src/lexer.xrl", 25).
 yyaction_2(TokenChars, TokenLine) ->
-     { token, { string, TokenLine, TokenChars } } .
+     begin
+     Stripped = lists : sublist (TokenChars, 2, length (TokenChars) - 2),
+     { token, { string, TokenLine, list_to_binary (Stripped) } }
+     end .
 
 -compile({inline,yyaction_3/1}).
--file("src/lexer.xrl", 25).
+-file("src/lexer.xrl", 31).
 yyaction_3(TokenLine) ->
      { token, { lform, TokenLine } } .
 
 -compile({inline,yyaction_4/1}).
--file("src/lexer.xrl", 26).
+-file("src/lexer.xrl", 32).
 yyaction_4(TokenLine) ->
      { token, { rform, TokenLine } } .
 
 -compile({inline,yyaction_5/1}).
--file("src/lexer.xrl", 28).
+-file("src/lexer.xrl", 34).
 yyaction_5(TokenLine) ->
      { token, { kw_if, TokenLine } } .
 
 -compile({inline,yyaction_6/1}).
--file("src/lexer.xrl", 29).
+-file("src/lexer.xrl", 35).
 yyaction_6(TokenLine) ->
      { token, { kw_let, TokenLine } } .
 
 -compile({inline,yyaction_7/1}).
--file("src/lexer.xrl", 30).
+-file("src/lexer.xrl", 36).
 yyaction_7(TokenLine) ->
      { token, { kw_in, TokenLine } } .
 
 -compile({inline,yyaction_8/1}).
--file("src/lexer.xrl", 31).
+-file("src/lexer.xrl", 37).
 yyaction_8(TokenLine) ->
      { token, { kw_fun, TokenLine } } .
 
 -compile({inline,yyaction_9/1}).
--file("src/lexer.xrl", 32).
+-file("src/lexer.xrl", 38).
 yyaction_9(TokenLine) ->
      { token, { 'kw_=', TokenLine } } .
 
 -compile({inline,yyaction_10/1}).
--file("src/lexer.xrl", 33).
+-file("src/lexer.xrl", 39).
 yyaction_10(TokenLine) ->
      { token, { 'kw_=>', TokenLine } } .
 
 -compile({inline,yyaction_11/2}).
--file("src/lexer.xrl", 35).
+-file("src/lexer.xrl", 41).
 yyaction_11(TokenChars, TokenLine) ->
      { token, { identifier, TokenLine, list_to_binary (TokenChars) } } .
 -file("c:/Program Files/Erlang OTP/lib/parsetools-2.7.1/include/leexinc.hrl", 377).

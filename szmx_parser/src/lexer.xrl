@@ -22,7 +22,13 @@ Rules.
                 false -> {token, {number, TokenLine, list_to_integer(TokenChars) * 1.0}}
             end
         end.
-{Str} : {token, {string, TokenLine, TokenChars}}.
+
+{Str} :
+    begin
+        Stripped = lists:sublist(TokenChars, 2, length(TokenChars) - 2),
+        {token, {string, TokenLine, list_to_binary(Stripped)}}
+    end.
+        
 
 {LForm} : {token, {lform, TokenLine}}.
 {RForm} : {token, {rform, TokenLine}}.
