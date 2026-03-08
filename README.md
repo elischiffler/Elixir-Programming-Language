@@ -29,5 +29,5 @@ Our logic lives in szmx_interpreter/lib/szmx_interpreter.ex
 
 ``` shell
 cd szmx_interpreter
-mix test
+mix test --cover
 ```
