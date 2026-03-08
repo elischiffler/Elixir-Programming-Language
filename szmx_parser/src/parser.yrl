@@ -12,6 +12,6 @@ Rootsymbol expr.
 
 % Rules for how nonterminals are formed by terminals
 Rules.
-expr -> NumC : {number, $1}
-expr -> IdC : {identifier, $1}
-expr -> StrC : {string, $1}
+expr -> NumC : {number, $1}.
+expr -> IdC : {identifier, $1}.
+expr -> StrC : {string, $1}.
