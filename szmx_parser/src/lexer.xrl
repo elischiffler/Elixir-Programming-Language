@@ -16,7 +16,12 @@ RForm = [\}\)\]]
 Rules.
 {WS} : skip_token.
 
-{Num} : {token, {number, TokenLine, list_to_float(TokenChars)}}.
+{Num} : begin
+            case lists:member($., TokenChars) of
+                true -> {token, {number, TokenLine, list_to_float(TokenChars)}};
+                false -> {token, {number, TokenLine, list_to_integer(TokenChars) * 1.0}}
+            end
+        end.
 {Str} : {token, {string, TokenLine, TokenChars}}.
 
 {LForm} : {token, {lform, TokenLine}}.
