@@ -26,8 +26,9 @@ if : {token, {kw_if, TokenLine}}.
 let : {token, {kw_let, TokenLine}}.
 in : {token, {kw_in, TokenLine}}.
 fun : {token, {kw_fun, TokenLine}}.
-= : {token, {kw_=, TokenLine}}.
-=> : {token, {kw_=>, TokenLine}}.
+\= : {token, {'kw_=', TokenLine}}.
+\=\> : {token, {'kw_=>', TokenLine}}.
 
-{Id} : {token, {identifier, TokenLine, list_to_binary(TokenChars)}}
+{Id} : {token, {identifier, TokenLine, list_to_binary(TokenChars)}}.
+
 Erlang code.
