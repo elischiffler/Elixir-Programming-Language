@@ -2,7 +2,7 @@
 % https://www.erlang.org/doc/apps/parsetools/yecc.html
 
 % Nonterminals are the syntatic structure combining the tokens
-Nonterminals expr args ids.
+Nonterminals expr args ids binding bindings.
 
 % Terminals are the tokens that will be produced
 Terminals lform rform number identifier string kw_if kw_let kw_in kw_fun 'kw_=' 'kw_=>'.
@@ -63,3 +63,16 @@ ids -> identifier ids :
         [Id | '$2']
     end.
 ids -> '$empty' : [].
+
+%% Bindings form for let expressions
+binding -> lform ids 'kw_=' expr rform : {hd('$2'), '$4'}.
+bindings -> binding : ['$1'].
+bindings -> binding bindings : ['$1' | '$2'].
+
+expr -> lform kw_let lform bindings rform kw_in expr rform :
+    begin
+        Params = [Id || {Id, _Val} <- '$4'],
+        #{'__struct__' => 'Elixir.SzmxInterpreter.LamC',
+          params => Params,
+          body => '$7'}
+    end.

@@ -45,4 +45,16 @@ defmodule PARSERTest do
       }
     } = ast
   end
+
+  test "parser desugars a let expression" do
+    ast = PARSER.parser("{let {[x = 7] [y = 13]} in {+ x y}}")
+
+    assert %LamC{
+      params: ["x", "y"],
+      body: %AppC{
+        fun: %IdC{s: "+"},
+        args: [%IdC{s: "x"}, %IdC{s: "y"}]
+      }
+    } = ast
+  end
 end
